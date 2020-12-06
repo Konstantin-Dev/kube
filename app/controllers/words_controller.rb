@@ -1,5 +1,8 @@
 class WordsController < InheritedResources::Base
 
+  has_one_attached :image
+
+
   private
 
     def word_params
