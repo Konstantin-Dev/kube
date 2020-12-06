@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_06_084357) do
+ActiveRecord::Schema.define(version: 2020_12_06_163055) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -38,4 +38,38 @@ ActiveRecord::Schema.define(version: 2020_12_06_084357) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "complexities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.integer "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string "name"
+    t.integer "category_id", null: false
+    t.integer "complexity_id", null: false
+    t.integer "point_id", null: false
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_words_on_category_id"
+    t.index ["complexity_id"], name: "index_words_on_complexity_id"
+    t.index ["point_id"], name: "index_words_on_point_id"
+  end
+
+  add_foreign_key "words", "categories"
+  add_foreign_key "words", "complexities"
+  add_foreign_key "words", "points"
 end
